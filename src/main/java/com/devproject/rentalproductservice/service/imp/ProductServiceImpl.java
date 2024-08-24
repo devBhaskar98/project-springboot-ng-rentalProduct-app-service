@@ -26,4 +26,22 @@ public class ProductServiceImpl implements ProductService {
 		return new LinkedHashSet<>(this.productRepository.findAll());
 	}
 
+	@Override
+	public Product updateProduct(Product product) {
+		return this.productRepository.save(product);
+	}
+
+	@Override
+	public Product getProduct(Integer productId) {
+		return this.productRepository.findById(productId).get();
+	}
+
+	@Override
+	public void deleteProduct(Integer productId) {
+		Product product = new Product();
+		product.setId(productId);
+        this.productRepository.delete(product);
+		
+	}
+
 }
