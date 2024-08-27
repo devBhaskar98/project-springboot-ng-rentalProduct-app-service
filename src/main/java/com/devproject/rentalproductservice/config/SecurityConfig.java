@@ -37,6 +37,8 @@ public class SecurityConfig {
             http.authorizeHttpRequests(authorize -> authorize
                 .anyRequest().permitAll()
             );
+            
+            http.cors(Customizer.withDefaults());
 
             // Disable CSRF
             http.csrf(csrf -> csrf.disable());
