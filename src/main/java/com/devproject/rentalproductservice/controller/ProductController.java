@@ -1,6 +1,8 @@
 package com.devproject.rentalproductservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.devproject.rentalproductservice.common.dto.PageRequestDTO;
 import com.devproject.rentalproductservice.entity.Product;
 import com.devproject.rentalproductservice.service.ProductService;
 
@@ -35,6 +37,16 @@ public class ProductController {
         Product products = this.productService.addProduct(product);
         return ResponseEntity.ok(products);
     }
+    
+    @PostMapping("/page")
+	public Page<Product> getAllProductPaginatedResult(@RequestBody PageRequestDTO dto){
+		
+		Pageable pageable = new PageRequestDTO().getPageable(dto);
+		Page<Product> productPage = productService.findAllByPagination(pageable);		
+		
+		return productPage;
+	
+	}
     
   //get product
     @GetMapping("/{productId}")
