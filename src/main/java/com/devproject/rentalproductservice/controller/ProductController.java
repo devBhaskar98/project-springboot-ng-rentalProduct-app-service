@@ -23,7 +23,7 @@ import com.devproject.rentalproductservice.service.ProductService;
 @CrossOrigin(
         origins = "http://localhost:4200",
         allowedHeaders = "*",
-        methods = { RequestMethod.GET }
+        methods = { RequestMethod.GET, RequestMethod.POST }
 )
 public class ProductController {
 	
