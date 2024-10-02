@@ -11,6 +11,6 @@ import com.devproject.rentalproductservice.trending_news.news.NewsResponse;
 @FeignClient(name = "trending-news-service", url = "http://localhost:9091")
 public interface NewsClient {
 
-	@GetMapping("/trending")
+	@GetMapping("/api/news")
 	Optional<List<NewsResponse>> getAllNews();
 }
