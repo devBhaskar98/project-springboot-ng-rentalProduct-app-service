@@ -1,4 +1,4 @@
-package com.devproject.rentalproductservice.controller;
+package com.devproject.rentalproductservice.controllerv2;
 
 import java.util.Set;
 
@@ -8,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,23 +16,18 @@ import com.devproject.rentalproductservice.entity.Comment;
 import com.devproject.rentalproductservice.service.CommentService;
 
 @RestController
-@RequestMapping("/comment/v1")
+@RequestMapping("/comment/v2")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", methods = { RequestMethod.GET,
 		RequestMethod.POST })
-public class CommentController {
+public class CommentControllerV2 {
 
 	@Autowired
 	private CommentService commentService;
 
-	@PostMapping("/")
-	public ResponseEntity<Comment> addComment(@RequestBody Comment comment) {
-		Comment commentResult = this.commentService.addComment(comment);
-		return ResponseEntity.ok(commentResult);
-	}
-
 	// get all Comments
 	@GetMapping("/")
 	public ResponseEntity<Set<Comment>> getComments() {
+		System.out.println("Comment Controller : v2");
 		Set<Comment> comments = commentService.getComment();
 
 		HttpHeaders headers = new HttpHeaders();
