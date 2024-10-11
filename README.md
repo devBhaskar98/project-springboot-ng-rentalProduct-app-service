@@ -1,41 +1,89 @@
-# fullstack-oauth2-angular-spring-boot-keycloak
-An OAuth2 fullstack example with keycloak, angular and spring boot.
+# Rental Product - App Service 😊
 
-## setup keycloak
+This is an **OAuth2 Fullstack Example** built with **Keycloak**, **Angular**, and **Spring Boot**. This project demonstrates how to implement OAuth2 authentication and authorization using Keycloak as the Identity Provider.
 
-Go to `keycloak` folder, modify `Dockerfile` or `docker-compose.yml` (e.g. adjust the `postgres_data` volume) and start up postgres and keycloak via `docker compose up --build`.
+## Project Structure
 
-The file `dev-test-realm-realm.json` is used to import a complete realm configuration, including clients, users, roles, etc... into keycloak. 
+```plaintext
+/project-springboot-ng-rentalProduct-app-service
+├── rentalProduct        # Spring Boot backend
+│   └── (files...)
+└── keycloak       # Keycloak configuration
+    └── (files...)
+```
 
-Realm: `dev-test-realm`, Username: `testuser-1`, Password: `testuser1`
+## Technologies Used
 
-You may create and configure your own realm by using the keycloak admin console.
+- **Angular 17**: Frontend framework for building dynamic web applications.
+- **Spring Boot**: Java framework for building backend services.
+- **Keycloak**: Open-source Identity and Access Management for modern applications.
+- **OAuth2**: Protocol for authorization.
+- **PostgreSQL**: Database for storing user data (configured with Keycloak).
 
-Check if the keycloak admin console is reachable (`http://localhost:8180/`).
+## Getting Started
 
+Follow these instructions to set up your project locally.
 
-## angular webapp
+### Prerequisites
 
-Angular webapp is in `webapp`. Made with angular 17.
+- Docker
+- Maven
+- Java 21
 
-Using [angular-oauth2-oidc](https://www.npmjs.com/package/angular-oauth2-oidc)!
+### Setup Keycloak
 
-The `main.ts` file bootstraps the webapp by proving the http client and the oauthservice. Also initializing the oauthservice by providing a configuration, setup of silent token refresh, loading discovery document and login of user, if not already done.
+1. Navigate to the **keycloak** folder.
+2. Modify the `Dockerfile` or `docker-compose.yml` (e.g., adjust the `postgres_data` volume) as needed.
+3. Start up PostgreSQL and Keycloak via:
+   ```bash
+   docker-compose up --build
+   ```
+4. Import the realm configuration using the `dev-test-realm-realm.json` file. This includes clients, users, roles, etc. 
+5. Default Realm: **dev-test-realm**
+   - Username: **testuser-1**
+   - Password: **testuser1**
+6. You can create and configure your own realm using the Keycloak admin console.
+7. Check if the Keycloak admin console is reachable at: [http://localhost:8180/](http://localhost:8180/).
+<!--
+### Angular Web Application
 
-The component `AppComponent` provides a basic demo of logout and calling a protected API with the access token.
+1. The Angular web application is located in the **webapp** folder.
+2. It uses **angular-oauth2-oidc** for OAuth2 integration.
+3. The `main.ts` file bootstraps the web application by providing the HTTP client and `OAuthService`, along with the necessary configuration for silent token refresh and loading the discovery document.
+4. The `AppComponent` demonstrates logout functionality and calling a protected API with the access token.
+-->
 
-## spring-boot backend
+### Spring Boot Backend
 
-Spring boot backend is in `backend` folder. Requires Maven and Java 21.
+1. The Spring Boot backend is located in the **backend** folder.
+2. Ensure you have Maven and Java 21 installed.
+3. The `SecurityConfig` class configures the security filter chain:
+   - Enables CORS.
+   - Ensures all requests are authenticated.
+   - Configures the application as an OAuth2 resource server (verifying access tokens via the JWT issuer).
+   - Uses a custom JWT converter to extract relevant data from the JWT.
+4. The `application.properties` file is configured with the JWT issuer, pointing to the locally running Keycloak.
+5. The `CustomJwt` class contains all relevant information extracted from the JWT bearer token.
+6. The `HelloController` has a basic GET endpoint that returns a message, but only for authorized users with the authority **ROLE_fullstack-developer**. CORS is configured to work with the locally running Angular web application.
 
-The class `SecurityConfig` configures the security filter chain, enabling CORS, makes sure that all requests must be authenticated, configures to be an oauth2 resource server (verify access token via JWT issuer) and to use a custom JWT converter to extract all relevant data from the JWT.
+## Features
 
-The `application.properties` file has the JWT issuer configured, pointing to the locally running keycloak.
+- **OAuth2 Authentication**: Secure user authentication using Keycloak.
+- **Angular Frontend**: Dynamic and responsive user interface built with Angular.
+- **Spring Boot Backend**: RESTful APIs with secure access.
+- **CORS Configuration**: Ensures frontend and backend can communicate securely.
+- **Role-Based Access Control**: Access control based on user roles.
 
-The `CustomJwt` is a customized JWT containing all relevant information we need extracted from the JWT bearer token.
+### Contributing
 
-The `HelloController` has a basic GET endpoint, CORS is configured to work with a locally running angular webapp. The GET method returns a message, but only for authorized users which have the authority `ROLE_fullstack-developer`.
+Contributions are welcome! Please follow these steps:
 
-The granted authorities are extracted by the `CustomJwtConverter`.
+    Fork the repository.
+    Create a new branch (git checkout -b feature/YourFeature).
+    Make your changes and commit them (git commit -m 'Add some feature').
+    Push to the branch (git push origin feature/YourFeature).
+    Open a pull request.
 
+### License
 
+This project is licensed under the Tor Production 😊 License.
