@@ -1,4 +1,5 @@
 package com.devproject.rentalproductservice.entity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,23 +14,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Table(name="product")
+@Table(name = "product")
 public class Product {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="product_name")
+
+	@Column(name = "product_name")
 	private String name;
-	
-	@Column(name="product_price")
+
+	@Column(name = "product_price")
 	private int price;
-	
-	
-	
-	
-	
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.devproject.rentalproductservice.common.dto.PageRequestDTO;
 import com.devproject.rentalproductservice.entity.Product;
+import com.devproject.rentalproductservice.service.KafkaProducer;
 import com.devproject.rentalproductservice.service.ProductService;
 
 @RestController
@@ -27,6 +28,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	KafkaProducer kafkaProducer;
 
 	// add product
 	@PostMapping("/")
@@ -65,7 +69,16 @@ public class ProductController {
 
 	// delete product
 	@DeleteMapping("/{productId}")
-	public void deleteCategory(@PathVariable("productId") Integer productId) {
-		this.productService.deleteProduct(productId);
+	public String deleteCategory(@PathVariable("productId") Integer productId) {
+		Product deletedProduct = this.productService.deleteProduct(productId);
+
+		if (deletedProduct.getId() != 0) {
+			String retMessage = "Product " + deletedProduct.getName() + " deleted successfully";
+			;
+			kafkaProducer.sendMessageToRentalTopic(retMessage);
+			return retMessage;
+		} else {
+			return "Product is not found";
+		}
 	}
 }
