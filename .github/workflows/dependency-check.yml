@@ -2,9 +2,9 @@ name: OWASP Dependency-Check
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -34,7 +34,7 @@ jobs:
         run: ./mvnw dependency-check:check
 
       - name: Archive report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report
           path: target/dependency-check-report.html
