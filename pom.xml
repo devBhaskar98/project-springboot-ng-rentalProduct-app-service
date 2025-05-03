@@ -16,7 +16,13 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+<<<<<<< Updated upstream
 	
+=======
+	<modules>
+    <module>./services/discovery</module>
+</modules>
+>>>>>>> Stashed changes
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
