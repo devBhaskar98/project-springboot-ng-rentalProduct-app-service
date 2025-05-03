@@ -1,6 +1,7 @@
 package com.devproject.rentalproductservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -51,8 +52,28 @@ public class ProductController {
 
 	// get product
 	@GetMapping("/{productId}")
+	@Cacheable(cacheNames = "product", key = "#productId")
 	public Product getProduct(@PathVariable Integer productId) {
-		return this.productService.getProduct(productId);
+		try {
+			Thread.sleep(3000); // simulate delay
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt(); // best practice
+		}
+		return productService.getProduct(productId);
+	}
+
+	@GetMapping("/cache/{productId1}")
+	@Cacheable(cacheNames = "product1", key = "#productId1")
+	public Product getProductCache(@PathVariable Integer productId1) {
+		try {
+			Thread.sleep(3000); // simulate delay
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
+
+		// Retrieve the product from the cache or from the service (if not cached yet)
+		return productService.getProduct(productId1);
+
 	}
 
 //	//get all product

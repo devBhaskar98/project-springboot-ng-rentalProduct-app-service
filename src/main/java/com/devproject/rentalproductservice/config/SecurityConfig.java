@@ -55,6 +55,8 @@ public class SecurityConfig {
 			http.csrf(csrf -> csrf.disable());
 		}
 
+		http.headers().cacheControl().disable();
+
 		return http.build();
 	}
 
