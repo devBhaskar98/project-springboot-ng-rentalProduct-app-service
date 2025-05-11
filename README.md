@@ -1,16 +1,7 @@
-# Rental Product - App Service 😊
 
-This is an **OAuth2 Fullstack Example** built with **Keycloak**, **Angular**, and **Spring Boot**. This project demonstrates how to implement OAuth2 authentication and authorization using Keycloak as the Identity Provider.
+This is an **OAuth2 Fullstack Example** built with **Keycloak**, **Angular**, and **Spring Boot**.   
+This project demonstrates how to implement OAuth2 authentication and authorization using Keycloak as the Identity Provider.
 
-## Project Structure
-
-```plaintext
-/project-springboot-ng-rentalProduct-app-service
-├── rentalProduct        # Spring Boot backend
-│   └── (files...)
-└── keycloak       # Keycloak configuration
-    └── (files...)
-```
 
 ## Technologies Used
 
@@ -19,18 +10,22 @@ This is an **OAuth2 Fullstack Example** built with **Keycloak**, **Angular**, an
 - **Keycloak**: Open-source Identity and Access Management for modern applications.
 - **OAuth2**: Protocol for authorization.
 - **PostgreSQL**: Database for storing user data (configured with Keycloak).
-
-## Getting Started
-
-Follow these instructions to set up your project locally.
+- **Redis**: Caching the product response.
+- **Kafka**: Internal service communication.
 
 ### Prerequisites
 
 - Docker
 - Maven
 - Java 21
+- Redis
+- Kafka
 
-### Setup Keycloak
+## Getting Started
+
+Follow these instructions to set up your project locally.
+
+##### Setup Keycloak
 
 1. Navigate to the **keycloak** folder.
 2. Modify the `Dockerfile` or `docker-compose.yml` (e.g., adjust the `postgres_data` volume) as needed.
@@ -44,16 +39,8 @@ Follow these instructions to set up your project locally.
    - Password: **testuser1**
 6. You can create and configure your own realm using the Keycloak admin console.
 7. Check if the Keycloak admin console is reachable at: [http://localhost:8180/](http://localhost:8180/).
-<!--
-### Angular Web Application
 
-1. The Angular web application is located in the **webapp** folder.
-2. It uses **angular-oauth2-oidc** for OAuth2 integration.
-3. The `main.ts` file bootstraps the web application by providing the HTTP client and `OAuthService`, along with the necessary configuration for silent token refresh and loading the discovery document.
-4. The `AppComponent` demonstrates logout functionality and calling a protected API with the access token.
--->
-
-### Spring Boot Backend
+##### Spring Boot Backend
 
 1. The Spring Boot backend is located in the **backend** folder.
 2. Ensure you have Maven and Java 21 installed.
