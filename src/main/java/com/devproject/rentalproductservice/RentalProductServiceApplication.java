@@ -1,7 +1,5 @@
 package com.devproject.rentalproductservice;
 
-import java.util.Arrays;
-
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,8 +19,6 @@ public class RentalProductServiceApplication {
 	public static void main(String[] args) {
 
 		context = SpringApplication.run(RentalProductServiceApplication.class, args);
-		String[] profiles = context.getEnvironment().getActiveProfiles();
-		System.out.println("🔍 Active profiles: " + Arrays.toString(profiles));
 		System.out.println("Rental Product Service is running...");
 	}
 

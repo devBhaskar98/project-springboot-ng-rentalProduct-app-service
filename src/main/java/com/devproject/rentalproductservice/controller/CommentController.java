@@ -26,12 +26,6 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 
-	@PostMapping("/")
-	public ResponseEntity<Comment> addComment(@RequestBody Comment comment) {
-		Comment commentResult = this.commentService.addComment(comment);
-		return ResponseEntity.ok(commentResult);
-	}
-
 	// get all Comments
 	@GetMapping("/")
 	public ResponseEntity<Set<Comment>> getComments() {
@@ -41,6 +35,12 @@ public class CommentController {
 		headers.add(HttpHeaders.CACHE_CONTROL, "max-age=3600"); // Cache for 1 hour
 
 		return new ResponseEntity<>(comments, headers, HttpStatus.OK);
+	}
+
+	@PostMapping("/")
+	public ResponseEntity<Comment> addComment(@RequestBody Comment comment) {
+		Comment commentResult = this.commentService.addComment(comment);
+		return ResponseEntity.ok(commentResult);
 	}
 
 }
