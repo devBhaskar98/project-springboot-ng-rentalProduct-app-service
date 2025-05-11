@@ -1,10 +1,13 @@
 package com.devproject.rentalproductservice.entity;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +30,8 @@ public class Product {
 
 	@Column(name = "product_price")
 	private int price;
+
+	@OneToMany(mappedBy = "productId")
+	private Set<FileUpload> files;
 
 }

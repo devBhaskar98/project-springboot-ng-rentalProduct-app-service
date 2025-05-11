@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.devproject.rentalproductservice.Exception.StorageFileNotFoundException;
+import com.devproject.rentalproductservice.service.FileUploadService;
 import com.devproject.rentalproductservice.service.StorageService;
 
 @RestController
@@ -30,6 +31,9 @@ public class FileUploadController {
 	public FileUploadController(StorageService storageService) {
 		this.storageService = storageService;
 	}
+
+	@Autowired
+	private FileUploadService fileUploadSvc;
 
 	@GetMapping("/files")
 	public ResponseEntity<List<String>> listUploadedFiles() throws IOException {
@@ -58,6 +62,9 @@ public class FileUploadController {
 
 		System.out.println("my product id is " + productId);
 		storageService.store(file);
+
+		// store it in uploaded_files table
+		fileUploadSvc.saveFile(file, productId);
 
 		return ResponseEntity.ok("You successfully uploaded " + file.getOriginalFilename() + "!");
 	}

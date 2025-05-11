@@ -1,6 +1,7 @@
 package com.devproject.rentalproductservice.service.imp;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -9,15 +10,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.devproject.rentalproductservice.entity.FileUpload;
 import com.devproject.rentalproductservice.entity.Product;
+import com.devproject.rentalproductservice.repository.FileUploadRepository;
 import com.devproject.rentalproductservice.repository.ProductRepository;
 import com.devproject.rentalproductservice.service.ProductService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private FileUploadRepository fileUploadRepository;
 
 	@Override
 	public Product addProduct(Product product) {
@@ -26,7 +34,13 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Set<Product> getProduct() {
-		return new LinkedHashSet<>(this.productRepository.findAll());
+
+		List<Product> products = productRepository.findAll();
+		for (Product product : products) {
+			List<FileUpload> files = fileUploadRepository.findByProductId(product.getId());
+			product.setFiles(new LinkedHashSet<>(files));
+		}
+		return new LinkedHashSet<>(products);
 	}
 
 	@Override
@@ -35,7 +49,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Transactional
 	public Product getProduct(Integer productId) {
+		Product product = productRepository.findById(productId).get();
+		List<FileUpload> files = fileUploadRepository.findByProductId(product.getId());
+		product.setFiles(new LinkedHashSet<>(files));
 		return this.productRepository.findById(productId).get();
 	}
 

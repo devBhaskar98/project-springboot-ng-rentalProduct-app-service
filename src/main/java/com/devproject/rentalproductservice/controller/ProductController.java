@@ -52,7 +52,6 @@ public class ProductController {
 
 	// get product
 	@GetMapping("/{productId}")
-	@Cacheable(cacheNames = "product", key = "#productId")
 	public Product getProduct(@PathVariable Integer productId) {
 		try {
 			Thread.sleep(3000); // simulate delay
