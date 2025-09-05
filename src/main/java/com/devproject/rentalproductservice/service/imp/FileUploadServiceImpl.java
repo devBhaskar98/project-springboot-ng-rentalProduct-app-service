@@ -34,9 +34,9 @@ public class FileUploadServiceImpl implements FileUploadService {
 			Path destinationFile = rootLocation.resolve(Paths.get(file.getOriginalFilename())).normalize();
 			Files.copy(file.getInputStream(), destinationFile);
 
-			FileUpload fileUploadEntity = new FileUpload(file.getOriginalFilename(), destinationFile.toString(),
-					productId);
-			fileUploadRepository.save(fileUploadEntity);
+//			FileUpload fileUploadEntity = new FileUpload(file.getOriginalFilename(), destinationFile.toString(),
+//					productId);
+//			fileUploadRepository.save(fileUploadEntity);
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to store file", e);
 		}
