@@ -37,28 +37,34 @@ Follow these instructions to set up your project locally.
 	
 ## Build Main Project
 
+```
 $docker build -t rentalproduct:1.0.0 .
-
+```
 > view the docker images
+```
 $docker images
+```
 
 > run the rentalProduct image with following command
+```
 $docker run -t  --name rental-product-service  --network rental-net -p 8081:8081 -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/rental_product -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=admin123 rentalproduct:1.0.0
+```
 
 
-
-###How to correctly get the runnable JAR from Docker
-
+### How to correctly get the runnable JAR from Docker
+```
 $docker create --name temp-container rentalproduct:1.0.0
 $docker cp temp-container:/app/rentalproduct.jar ./rentalproduct-1.0.0.jar
 $docker rm temp-container
 $java -jar rentalproduct-1.0.0.jar
+```
 
-###Push the image to Docker Hub
+### Push the image to Docker Hub
+```
 $docker login
 $docker tag rentalproduct:1.0.0 devbhaskar/rentalproduct:1.0.0
 $docker push devbhaskar/rentalproduct:1.0.0
-
+```
 
 
 ## Build Main Project with Service
