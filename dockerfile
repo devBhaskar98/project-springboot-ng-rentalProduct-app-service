@@ -25,9 +25,9 @@ COPY --from=builder /app/target/rentalproduct-1.0.0.jar /app/rentalproduct.jar
 EXPOSE 8080
 
 # Set environment variables for PostgreSQL connection (default values)
-ENV SPRING_DATASOURCE_URL=jdbc:postgresql://rental-product-db:5432/rental_product
-ENV SPRING_DATASOURCE_USERNAME=admin
-ENV SPRING_DATASOURCE_PASSWORD=admin@123
+#ENV SPRING_DATASOURCE_URL=jdbc:postgresql://rental-product-db:5432/rental_product
+#ENV SPRING_DATASOURCE_USERNAME=admin
+#ENV SPRING_DATASOURCE_PASSWORD=admin@123
 
 # Run the jar file
 ENTRYPOINT ["java", "-jar", "rentalproduct.jar"]
