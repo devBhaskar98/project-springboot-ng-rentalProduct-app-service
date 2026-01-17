@@ -17,6 +17,10 @@ import lombok.Setter;
 @Table(name = "uploaded_files")
 public class FileUpload {
 
+	public FileUpload(String originalFilename, String string, Long productId2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

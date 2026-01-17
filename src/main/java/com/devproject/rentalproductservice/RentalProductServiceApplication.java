@@ -1,5 +1,7 @@
 package com.devproject.rentalproductservice;
 
+import java.util.TimeZone;
+
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,11 +19,15 @@ public class RentalProductServiceApplication {
 	private static ConfigurableApplicationContext context;
 
 	public static void main(String[] args) {
-
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"));
 		context = SpringApplication.run(RentalProductServiceApplication.class, args);
 		System.out.println("Rental Product Service is running...");
 	}
 
+	/*
+	 * Restart application by closing the context and running new application in new
+	 * thread
+	 */
 	public static void restart() {
 		ApplicationArguments args = context.getBean(ApplicationArguments.class);
 

@@ -70,8 +70,13 @@ public class ProductController {
 			Thread.currentThread().interrupt();
 		}
 
+		Product product = productService.getProduct(productId1);
+
+		// ❗ Remove files before caching
+		product.setFiles(null);
+
 		// Retrieve the product from the cache or from the service (if not cached yet)
-		return productService.getProduct(productId1);
+		return product;
 
 	}
 
